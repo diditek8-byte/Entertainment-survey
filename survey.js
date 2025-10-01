@@ -17,6 +17,10 @@ document.addEventListener('DOMContentLoaded', function () {
       // Add 'active' class to the clicked label
       const selectedLabel = document.querySelector(`label[for="${this.id}"]`);
       if (selectedLabel) selectedLabel.classList.add('active');
+
+      document.getElementById('my-form').addEventListener('submit',function(event) {
+        event.preventDefault(); 
+      });
     });
   });
 });
