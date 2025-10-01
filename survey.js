@@ -18,40 +18,4 @@ document.addEventListener('DOMContentLoaded', function () {
       if (selectedLabel) selectedLabel.classList.add('active');
     });
   });
-
-  // ✅ Attach submit event only once
-  const form = document.getElementById('my-form');
-  if (form) {
-    form.addEventListener('submit', function (event) {
-      event.preventDefault();
-
-      const formData = new FormData(form);
-      const actionUrl = form.action;
-      const method = form.method || 'POST';
-
-      fetch(actionUrl, {
-        method: method,
-        body: formData
-      })
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.text();
-        })
-        .then(data => {
-          console.log('Success:', data);
-          alert('Form submitted successfully!');
-          form.reset();
-        })
-        .catch(error => {
-          console.error('Error:', error);
-          alert('An error occurred during submission.');
-        });
-    });
-  }
 });
-
-
-      
-  
