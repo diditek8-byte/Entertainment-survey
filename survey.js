@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function () {
   console.log("Hello from JavaScript!");
 
@@ -17,44 +16,42 @@ document.addEventListener('DOMContentLoaded', function () {
       // Add 'active' class to the clicked label
       const selectedLabel = document.querySelector(`label[for="${this.id}"]`);
       if (selectedLabel) selectedLabel.classList.add('active');
+    });
+  });
 
-      document.getElementById('my-form').addEventListener('submit',function(event) {
-        event.preventDefault(); 
+  // ✅ Attach submit event only once
+  const form = document.getElementById('my-form');
+  if (form) {
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
 
-        const form = event.target;
-        const formData = new FormData(form);
+      const formData = new FormData(form);
+      const actionUrl = form.action;
+      const method = form.method || 'POST';
 
-        const actionUrl = form.action;
-        const method = form.method;
-
-        fetch(actionUrl, {
-          method: method,
-          body: formData
-        })
+      fetch(actionUrl, {
+        method: method,
+        body: formData
+      })
         .then(response => {
-          if (!response.ok) {
-            throw new Error('Networkresponse was not ok');
-          }
-          return response.text();
-        })
-        .then(data => {
           if (!response.ok) {
             throw new Error('Network response was not ok');
           }
           return response.text();
         })
         .then(data => {
-          consol.log{'Success:', data);
-                     alert('Form submitted successfully!');
-                     form.reset();
-                    })
+          console.log('Success:', data);
+          alert('Form submitted successfully!');
+          form.reset();
+        })
         .catch(error => {
-          console.error('Error:' error);
-          allert('An error occurred during submission.');
+          console.error('Error:', error);
+          alert('An error occurred during submission.');
         });
-      });
-      });
     });
-  });
+  }
 });
 
+
+      
+  
