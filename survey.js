@@ -20,6 +20,39 @@ document.addEventListener('DOMContentLoaded', function () {
 
       document.getElementById('my-form').addEventListener('submit',function(event) {
         event.preventDefault(); 
+
+        const form = event.target;
+        const formData = new FormData(form);
+
+        const actionUrl = form.action;
+        const method = form.method;
+
+        fetch(actionUrl, {
+          method: method,
+          body: formData
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Networkresponse was not ok');
+          }
+          return response.text();
+        })
+        .then(data => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.text();
+        })
+        .then(data => {
+          consol.log{'Success:', data);
+                     alert('Form submitted successfully!');
+                     form.reset();
+                    })
+        .catch(error => {
+          console.error('Error:' error);
+          allert('An error occurred during submission.');
+        });
+      });
       });
     });
   });
